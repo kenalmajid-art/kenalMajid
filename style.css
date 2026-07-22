@@ -1,0 +1,430 @@
+/* --- RESET & GLOBAL STYLE --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', cursive, Sans-Serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #a8d8ff 0%, #e0f0ff 50%, #c4e0ff 100%);
+    overflow-x: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #66b3ff, #1a75ff, #0052cc);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.selesai {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Karakter Awan Lucu */
+.awan-lucu {
+    position: relative;
+    width: 150px;
+    height: 80px;
+    background: #ffffff;
+    border-radius: 100px;
+    margin-bottom: 40px;
+    animation: melompat 1s infinite ease-in-out;
+}
+
+.awan-lucu::before, .awan-lucu::after {
+    content: '';
+    position: absolute;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+.awan-lucu::before {
+    width: 70px;
+    height: 70px;
+    top: -35px;
+    left: 20px;
+}
+
+.awan-lucu::after {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+    right: 20px;
+}
+
+/* Wajah & Efek Kedip Mata */
+.mata-kiri, .mata-kanan {
+    position: absolute;
+    width: 15px;
+    height: 20px;
+    background: #222;
+    border-radius: 50%;
+    top: 25px;
+    transition: height 0.1s ease, transform 0.1s ease;
+    transform-origin: center;
+}
+
+.mata-kiri { left: 40px; }
+.mata-kanan { right: 40px; }
+
+/* Kelas saat mata menutup */
+.mata-tutup {
+    height: 3px !important;
+    transform: translateY(8px);
+}
+
+.senyum {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    border-bottom: 4px solid #222;
+    border-radius: 0 0 40px 40px;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes melompat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.teks-loading {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.persen {
+    color: white;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.bar-container {
+    width: 250px;
+    height: 15px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid white;
+}
+
+.bar-isi {
+    height: 100%;
+    background: linear-gradient(90deg, #ffff66, #ffcc00);
+    border-radius: 20px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+#kontenUtama {
+  display: none;
+}
+
+/* Hati yang melayang */
+.hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.heart {
+    position: absolute;
+    color: #3399ff;
+    font-size: 20px;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
+}
+
+/* --- CONTAINER UTAMA --- */
+.container {
+    position: relative;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.75);
+    border-radius: 25px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    width: 100%;
+    max-width: 360px;
+    margin-top: 12rem;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.container.hidden {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+
+.container h1 {
+  text-align: center;
+  color: #3399ff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* --- WADAH SURAT (ENVELOPE) --- */
+.envelope {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(51, 153, 255, 0.15);
+    padding: 30px 25px;
+    margin-bottom: 25px;
+    position: absolute;
+    
+    /* Efek transisi buka tutup yang mulus */
+    display: none; /* Diatur via JS menggunakan class open */
+    max-height: 70vh;
+    overflow-y: scroll; 
+    scroll-behavior: smooth;
+    border: 3px dashed #3399ff;
+}
+
+/* Aktif saat tombol diklik */
+.envelope.open {
+    display: block;
+    animation: slideUp 0.5s ease forward;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* --- ISI SURAT --- */
+section.letter {
+    width: 100%;
+    text-align: center;
+}
+
+.letter h1 {
+    color: #3399ff;
+    font-size: 2rem;
+    font-family: 'Segoe UI', cursive, Sans-Serif;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.sub-title {
+    color: #666;
+    font-family: 'Segoe UI', cursive, Sans-Serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    border-bottom: 1px dashed #99ccff;
+    padding-bottom: 15px;
+}
+
+.message p {
+    color: #444;
+    font-family: 'Segoe UI', cursive, Sans-Serif;
+    font-size: 1.3rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.message p span {
+  color: #3399ff;
+}
+
+.love {
+    color: #3399ff;
+    font-weight: bold;
+    font-size: 1.35rem;
+    margin-top: 25px;
+    text-align: center !important;
+}
+
+/* --- COUNTDOWN --- */
+.countdown {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed #99ccff;
+}
+
+.countdown p {
+    color: #888;
+    font-size: 0.96rem;
+    margin-bottom: 10px;
+}
+
+.timer {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #3399ff;
+    letter-spacing: 0.5px;
+}
+
+/* --- TOMBOL TUTUP (X) --- */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 3rem;
+    color: #3399ff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #ff4757;
+}
+
+/* --- TOMBOL UTAMA --- */
+.btn {
+    width: 95%;
+    max-width: 320px;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #3399ff, #66b3ff);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #004b98;
+    margin: 10px 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+.btn.secondary {
+    font-size: 1.15rem;
+    background: linear-gradient(135deg, #66b3ff, #99ccff);
+    box-shadow: 0 6px 0 #004b98;
+}
+
+.btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #004b98;
+}
+
+/* --- HALAMAN GALERI --- */
+section.galery {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #a8d8ff 0%, #e0f0ff 50%, #c4e0ff 100%);
+    z-index: 100;
+    padding: 60px 20px 40px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+section.galery.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- PERBAIKAN TOMBOL CLOSE DI GALERI --- */
+section.galery .close-btn {
+    position: fixed; /* Membuat tombol tetap di posisinya saat galeri di-scroll */
+    top: 20px;
+    right: 20px;
+    color: #3399ff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    z-index: 110; /* Harus lebih tinggi dari z-index section.galery (100) */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+section.galery .close-btn:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Sedikit penyesuaian padding atas galeri agar judul tidak mepet ke tombol */
+section.galery {
+    padding-top: 80px;
+}
+
+
+.galery h2 {
+    text-align: center;
+    color: #1a75ff;
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.02);
+}
+
+/* Custom Scrollbar */
+.envelope::-webkit-scrollbar,
+.galery::-webkit-scrollbar {
+    width: 6px;
+}
+.envelope::-webkit-scrollbar-track,
+.galery::-webkit-scrollbar-track {
+    background: transparent;
+}
+.envelope::-webkit-scrollbar-thumb,
+.galery::-webkit-scrollbar-thumb {
+    background: #b3d9ff;
+    border-radius: 10px;
+}
