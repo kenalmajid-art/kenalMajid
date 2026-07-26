@@ -1,4 +1,4 @@
-/* --- RESET & GLOBAL STYLE --- */
+    /* --- RESET & GLOBAL STYLE --- */
 * {
     margin: 0;
     padding: 0;
@@ -126,6 +126,7 @@ body {
     border: 2px solid white;
 }
 
+/* bar loading */
 .bar-isi {
     height: 100%;
     background: linear-gradient(90deg, #ffff66, #ffcc00);
@@ -179,8 +180,9 @@ body {
     justify-content: center;
     min-height: 40vh;
     width: 100%;
-    max-width: 360px;
-    margin-top: 12rem;
+    max-width: 400px;
+    margin-top: 10rem;
+    padding: 1rem;
     transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
@@ -343,6 +345,7 @@ section.galery {
     left: 0;
     width: 100%;
     height: 100%;
+    max-width: 400px;
     background: linear-gradient(135deg, #a8d8ff 0%, #e0f0ff 50%, #c4e0ff 100%);
     z-index: 100;
     padding: 60px 20px 40px;
@@ -397,7 +400,6 @@ section.galery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    max-width: 360px;
     margin: 0 auto;
 }
 
@@ -414,17 +416,245 @@ section.galery {
     transform: scale(1.02);
 }
 
-/* Custom Scrollbar */
-.envelope::-webkit-scrollbar,
-.galery::-webkit-scrollbar {
-    width: 6px;
+/* --- HALAMAN MUSIC --- */
+section.music {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #a8d8ff 0%, #e0f0ff 50%, #c4e0ff 100%);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
-.envelope::-webkit-scrollbar-track,
-.galery::-webkit-scrollbar-track {
-    background: transparent;
+
+/* Hanya terlihat saat class active ditambahkan */
+section.music.active {
+    opacity: 1;
+    visibility: visible;
 }
-.envelope::-webkit-scrollbar-thumb,
-.galery::-webkit-scrollbar-thumb {
-    background: #b3d9ff;
+
+/* Tombol Close di Music Page */
+section.music .close-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color: #3399ff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    z-index: 110;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+section.music .close-btn:hover {
+    color: white;
+    transform: scale(1.05);
+}
+
+/* --- MUSIC PLAYER CONTAINER --- */
+.music-player {
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 15px 35px rgba(51, 153, 255, 0.15);
+    padding: 30px;
+    overflow: hidden;
+    color: #3399ff;
+}
+
+.music-name,
+.artist-name {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.music-name {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1a75ff;
+}
+
+.artist-name {
+    font-size: 16px;
+    color: #66b3ff;
+}
+
+.disk {
+    position: relative;
+    display: block;
+    margin: 30px auto;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background-size: cover;
+    box-shadow: 0 0 0 8px rgba(51, 153, 255, 0.2);
+    animation-name: rotate;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+}
+
+.disk.play {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.disk::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #1a75ff;
+}
+
+.song-slider {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.seek-bar {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
     border-radius: 10px;
+    background: #c4e0ff;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 10px;
+    box-shadow: -400px 0 0 400px #3399ff;
+}
+
+.current-time,
+.song-duration {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #3399ff;
+    font-weight: 500;
+}
+
+.song-duration {
+    position: absolute;
+    right: 0;
+}
+
+.controls {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+/* Tombol Play & Navigasi dengan Akses Warna Biru */
+.play-btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3399ff, #66b3ff);
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 10px rgba(51, 153, 255, 0.3);
+}
+
+.play-btn span {
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 30px;
+    border-radius: 2px;
+    background: #ffffff;
+    transition: .5s;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.play-btn span:nth-child(2) {
+    left: 55%;
+    transform-origin: center;
+}
+
+.play-btn.pause span:nth-child(2) {
+    transform: translateY(-50%) scaleY(0);
+}
+
+.play-btn.pause span:nth-child(1) {
+    width: 35%;
+    left: 53%;
+    transform: translate(-50%, -50%);
+    border-radius: 0;
+    clip-path: polygon(0 0, 100% 50%, 100% 50%, 0% 100%);
+}
+
+.play-btn.pause {
+    animation: pulse 1.8s linear infinite;
+}
+
+/* animasi img berputar */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(51, 153, 255, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(51, 153, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 0 12px rgba(51, 153, 255, 0);
+    }
+}
+
+/* next & previeus */
+.butn {
+    width: 50px;
+    height: 50px;
+    background: #c4e0ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.butn i {
+    color: #3399ff;
 }
