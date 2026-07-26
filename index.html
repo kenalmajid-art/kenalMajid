@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -6,6 +7,8 @@
     <title>Happy Anniversary</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   </head>
   <body>
       
@@ -65,6 +68,7 @@
             <button class="btn secondary" id="openGalleryBtn">
                 Klik Untuk Melihat Galeri 📸
             </button>
+            <button class="btn secondary" id="openMusicBtn">Playlist Favorit Songs 🎧</button>
         </div>
 
         <!-- Halaman Galeri -->
@@ -81,8 +85,36 @@
                 <img src="p7.jpg" alt="kenangan 7" />
             </div>
         </section>
+        
+        <section class="music" id="musicPage">
+          <audio src="" id="audio"></audio>
+          <button class="close-btn" id="closeMusic">×</button>
+          <div class="music-player">
+            <h1 class="music-name">song one</h1>
+            <p class="artist-name">artis</p>
+    
+            <div class="disk"></div>
+    
+            <div class="song-slider">
+              <input type="range" value="0" class="seek-bar">
+              <span class="current-time">00:00</span>
+              <span class="song-duration">00:00</span>
+            </div>
+    
+            <div class="controls">
+              <button class="butn backward-btn"><i class="fa-solid fa-backward-step"></i></button>
+              <button class="play-btn pause">
+                <span></span>
+                <span></span>
+                </button> 
+              <button class="butn forward-btn"><i class="fa-solid fa-forward-step"></i></button>
+            </div>
+          </div>
+        </section>
       </div>  
         
         <script src="script.js"></script>
+        <script src="data.js"></script>
+        <script src="app.js"></script>
   </body>
 </html>
