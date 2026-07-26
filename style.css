@@ -340,7 +340,7 @@ section.letter {
 
 /* --- HALAMAN GALERI --- */
 section.galery {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -348,7 +348,7 @@ section.galery {
     max-width: 400px;
     background: linear-gradient(135deg, #a8d8ff 0%, #e0f0ff 50%, #c4e0ff 100%);
     z-index: 100;
-    padding: 60px 20px 40px;
+    padding: 0.2rem auto;
     overflow-y: scroll;
     scroll-behavior: smooth;
     opacity: 0;
