@@ -11,11 +11,13 @@ const mataKanan = document.getElementById('mataKanan');
 const textAwal = document.getElementById("textAwal");
 const openBtn = document.getElementById("openBtn");
 const openGalleryBtn = document.getElementById("openGalleryBtn");
+const openMusicBtn = document.getElementById("openMusicBtn");
 const envelope = document.getElementById("envelope");
 const closeLetter = document.getElementById("closeLetter");
 const closeGallery = document.getElementById("closeGallery");
 const homePage = document.getElementById("homePage");
 const galleryPage = document.getElementById("galleryPage");
+const musicPage = document.getElementById("musicPage");
 const heartsContainer = document.getElementById("heartsContainer"); //[span_3](start_span)[span_3](end_span)
 
 let persen = 0;
@@ -62,6 +64,7 @@ openBtn.addEventListener("click", () => {
     textAwal.style.display = "none";
     openBtn.style.display = "none";
     openGalleryBtn.style.display = "none";
+    openMusicBtn.style.display = "none";
     startCountdown();
 });
 
@@ -71,12 +74,14 @@ closeLetter.addEventListener("click", () => {
         textAwal.style.display = "block";
         openBtn.style.display = "block";
         openGalleryBtn.style.display = "block";
+        openMusicBtn.style.display = "block";
     }, 200);
 });
 
 openGalleryBtn.addEventListener("click", () => {
     homePage.classList.add("hidden");
     galleryPage.classList.add("active");
+    musicPage.classList.add("hidden");
 });
 
 closeGallery.addEventListener("click", () => {
@@ -85,6 +90,38 @@ closeGallery.addEventListener("click", () => {
         homePage.classList.remove("hidden");
     }, 300);
 });
+
+openMusicBtn.addEventListener("click", () => {
+  homePage.classList.add("hidden");
+  galleryPage.classList.add("hidden");
+  musicPage.classList.add("active");
+});
+
+closeMusic.addEventListener("click", () => {
+  musicPage.classList.remove("active");
+  setTimeout(() => {
+    homePage.classList.remove("hidden");
+  }, 300);
+});
+
+closeMusic.addEventListener("click", () => {
+  musicPage.classList.remove("active");
+  
+  // Hentikan musik saat halaman ditutup
+  const music = document.querySelector('#audio');
+  const playBtn = document.querySelector('.play-btn');
+  const disk = document.querySelector('.disk');
+  if (music) {
+    music.pause();
+    playBtn.classList.add('pause');
+    disk.classList.remove('play');
+  }
+
+  setTimeout(() => {
+    homePage.classList.remove("hidden");
+  }, 300);
+});
+
 
 // === HITUNG WAKTU BERSAMA ===
 function updateTimer() {
