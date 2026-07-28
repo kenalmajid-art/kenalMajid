@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
   <head>
@@ -40,10 +39,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
                     <p class="sub-title">Untuk Anak Mg Acang Tercinta</p>
 
                     <div class="message">
-                        <p>Terima kasih telah hadir,  melengkapi hari-hariku,  dan bertahan bersamaku sejauh ini.</p>
-                        <p>Ada waktu di mana kita tak saling sapa,  jalan kita berbelok ke arah yang berbeda. Namun hari ini, aku bersyukur luar biasa : meski sempat hilang kabar, pada akhirnya kita kembali menemukan rumah yg sama, yaitu di hati satu sama lain.</p>
+                        <p>Terima kasih telah hadir, melengkapi hari-hariku, dan bertahan bersamaku sejauh ini.</p>
+                        <p>Ada waktu di mana kita tak saling sapa, jalan kita berbelok ke arah yang berbeda. Namun hari ini, aku bersyukur luar biasa : meski sempat hilang kabar, pada akhirnya kita kembali menemukan rumah yg sama, yaitu di hati satu sama lain.</p>
                         <p>Setiap detik bersamamu adalah anugerah terindah yg tuhan berikan kepadaku.</p>
-                        <p>Semoga  <span>kita akan selalu saling melengkapi, menyayangi, dan menua bersama.</span></p>
+                        <p>Semoga <span>kita akan selalu saling melengkapi, menyayangi, dan menua bersama.</span></p>
                         <p>Namun jika takdir berkata lain, apa daya aku yg hanya bisa mengikhlaskanmu.</p>
                         <p>Raihlah <span>kebahagiaanmu</span> walaupun <span>itu</span> tidak <span>bersamaku.</span></p>
                         <p class="love">I love you so much! 🤍</p>
@@ -65,10 +64,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
             <button class="btn animate__animated animate__bounceInRight animate__delay-0.5s" id="openBtn">
                 Klik Untuk Membuka Pesan 💌
             </button>
-            <button class="btn secondary animate__animated animate__bounceInLeft animate__delay-0.7s" id="openGalleryBtn">
+            <button class="btn secondary animate__animated animate__bounceInLeft animate__delay-1.5s" id="openGalleryBtn">
                 Klik Untuk Melihat Galeri 📸
             </button>
-            <button class="btn secondary animate__animated animate__bounceInRight animate__delay-0.9s" id="openMusicBtn">Playlist Favorit Songs 🎧</button>
+            <button class="btn secondary animate__animated animate__bounceInRight animate__delay-2.5s" id="openMusicBtn">Playlist Favorit Songs 🎧</button>
         </div>
 
         <!-- Halaman Galeri -->
@@ -87,34 +86,48 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         </section>
         
         <section class="music" id="musicPage">
-          <audio src="" id="audio"></audio>
           <button class="close-btn" id="closeMusic">×</button>
-          <div class="music-player">
-            <h1 class="music-name">song one</h1>
-            <p class="artist-name">artis</p>
-    
-            <div class="disk"></div>
-    
-            <div class="song-slider">
-              <input type="range" value="0" class="seek-bar">
-              <span class="current-time">00:00</span>
-              <span class="song-duration">00:00</span>
+          <main class="player">
+            
+          <!-- AREA PIRINGAN -->
+            <div class="disk-container">
+              <canvas id="spectrum"></canvas>
+              <div id="disk" class="disk"></div>
             </div>
-    
+
+            <!-- INFORMASI LAGU -->
+            <div class="song-info">
+              <h2 id="song-name">
+                Song Name
+              </h2>
+
+              <p id="artist-name">
+                Artist
+                </p>
+            </div>
+
+            <!-- KONTROL -->
             <div class="controls">
-              <button class="butn backward-btn"><i class="fa-solid fa-backward-step"></i></button>
-              <button class="play-btn pause">
-                <span></span>
-                <span></span>
-                </button> 
-              <button class="butn forward-btn"><i class="fa-solid fa-forward-step"></i></button>
+              <button id="prev">
+                <i class="fa-solid fa-backward"></i>
+              </button>
+
+              <button id="play" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+              </button>
+
+              <button id="next">
+                <i class="fa-solid fa-forward"></i>
+              </button>
             </div>
-          </div>
+
+        <!-- AUDIO -->
+          <audio id="music"></audio>
+          </main>
         </section>
       </div>  
-        
-        <script src="script.js"></script>
-        <script src="data.js"></script>
-        <script src="app.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/js/all.min.js">
+    </script>
+    <script src="script.js"></script>
   </body>
 </html>
