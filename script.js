@@ -960,9 +960,11 @@ openMusicBtn.addEventListener(
         "active"
     );
 
-}
+    setTimeOut(() => {
+        resizeCanvas() ;
+    }, 100) ; 
 
-);
+});
 
 // ==================================================
 // TUTUP MUSIC PLAYER
